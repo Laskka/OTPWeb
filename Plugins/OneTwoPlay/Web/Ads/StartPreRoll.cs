@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class StartPreRoll : MonoBehaviour
 {
-    public void PlayPreRoll()
+    public void ShowPreRoll()
     {
         ADSManager.Instance.ShowPreRoll();
     }

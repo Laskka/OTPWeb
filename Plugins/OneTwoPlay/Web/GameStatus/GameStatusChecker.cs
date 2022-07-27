@@ -25,7 +25,7 @@ namespace OneTwoPlay.Web.GameStatus
 
         private void OnPauseGame()
         {
-            Time.timeScale = 0.00001f;
+            Time.timeScale = 0f;
             AudioListener.pause = true;
             _isAdsPaused = true;
         } 
@@ -36,7 +36,7 @@ namespace OneTwoPlay.Web.GameStatus
             {
                 if (_isPaused)
                 {
-                    Time.timeScale = 0.00001f;
+                    Time.timeScale = 0f;
                     AudioListener.pause = true;
                 }
                 else

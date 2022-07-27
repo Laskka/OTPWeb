@@ -9,16 +9,10 @@ namespace OneTwoPlay.Web.Ads
     {
         public bool RewardLoaded => _gameDistribution.IsRewardedVideoLoaded();
         
-        
-        private bool _isPaused = false;
-        private bool _isAdsPaused = false;
-
+        private GameDistribution _gameDistribution;
         private Action _actionAfterReward;
-        [SerializeField] private GameDistribution _gameDistribution;
-        
         private bool _isPlaying;
         private float _interDelay = 90;
-        private bool _interLoop = true;
         private bool _prerollShowed;
 
         public void Init(GameDistribution gameDistribution, bool interLoop, float interDelay)
@@ -26,7 +20,6 @@ namespace OneTwoPlay.Web.Ads
             DontDestroyOnLoad(this);
             
             _interDelay = interDelay;
-            _interLoop = interLoop;
             _gameDistribution = gameDistribution;
             
             GameDistribution.OnRewardedVideoSuccess += OnRewardedVideoSuccess;
@@ -34,12 +27,15 @@ namespace OneTwoPlay.Web.Ads
             
             if(interLoop)
                 _gameDistribution.StartCoroutine(InterLoop(_interDelay));
-        
             _gameDistribution.PreloadRewardedAd();
         }
 
         public bool ShowReward(Action getReward)
         {
+#if UNITY_EDITOR
+            getReward?.Invoke();
+            return true;
+#endif
             if(_isPlaying)
                 return false;
             _isPlaying = true;
@@ -50,7 +46,7 @@ namespace OneTwoPlay.Web.Ads
 
         public void ShowPreRoll()
         {
-            if (_prerollShowed != false) return;
+            if (_prerollShowed) return;
             _prerollShowed = true;
             ShowInter();
         }
@@ -85,6 +81,7 @@ namespace OneTwoPlay.Web.Ads
             _actionAfterReward?.Invoke();
             _gameDistribution.PreloadRewardedAd();
             _isPlaying = false;
+            _actionAfterReward = null;
         }
     }
 }

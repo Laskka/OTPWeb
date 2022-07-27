@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class StartMidRoll : MonoBehaviour
 {
-    public void ShowMirRoll()
+    public void ShowMidRoll()
     {
         ADSManager.Instance.ShowInter();
     }
