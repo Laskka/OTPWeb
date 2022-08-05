@@ -2,6 +2,7 @@ using UnityEngine;
 using OneTwoPlay.Web.Ads;
 using OneTwoPlay.Web.CheckOrientation;
 using OneTwoPlay.Web.GameStatus;
+using ScreenOrientation = OneTwoPlay.Web.CheckOrientation.OrientationChecker.ScreenOrientation;
 
 namespace OneTwoPlay.Web
 {
@@ -18,9 +19,9 @@ namespace OneTwoPlay.Web
         [SerializeField] private float _interDelay = 90f;
         
         [Header("Mobile Orientation")]
-        [SerializeField] private OrientationChecker.Orientation _orientationScreen = OrientationChecker.Orientation.Portrait;
+        [SerializeField] private ScreenOrientation _orientationScreen = ScreenOrientation.Portrait;
         
-        private void Awake()
+        private void Start()
         {
 #if PLATFORM_WEBGL
             _gameStatus = Instantiate(_gameStatus);

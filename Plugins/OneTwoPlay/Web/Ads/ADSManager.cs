@@ -32,10 +32,10 @@ namespace OneTwoPlay.Web.Ads
 
         public bool ShowReward(Action getReward)
         {
-//#if UNITY_EDITOR
-//            getReward?.Invoke();
-//            return true;
-//#endif
+// #if UNITY_EDITOR
+//             getReward?.Invoke();
+//             return true;
+// #endif
             if(_isPlaying)
                 return false;
             _isPlaying = true;

@@ -2,13 +2,12 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-namespace Plugins.OneTwoPlay.Web
+namespace OneTwoPlay.Web
 {
 #if UNITY_EDITOR
     [InitializeOnLoad]
     static class WebInstaller
     {
-        
         static WebInstaller()
         {
             AssetDatabase.importPackageCompleted += packageName =>
@@ -28,7 +27,14 @@ namespace Plugins.OneTwoPlay.Web
                      }
                 );
                 
+                
+                
+                PlayerSettings.stripEngineCode = true;
+                PlayerSettings.SetManagedStrippingLevel(BuildTargetGroup.WebGL, ManagedStrippingLevel.Low);
+                
                 PlayerSettings.WebGL.compressionFormat = WebGLCompressionFormat.Disabled;
+                PlayerSettings.WebGL.nameFilesAsHashes = true;
+                PlayerSettings.WebGL.exceptionSupport = WebGLExceptionSupport.ExplicitlyThrownExceptionsOnly;
                 Debug.Log( $"{packageName} installed!");
             };
         }
